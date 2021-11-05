@@ -2,14 +2,14 @@ def Calc():
     
     stack = []
     
-    print("Please use the following notation: + for addition, - for subtraction, * for multiplication, and / for division.")
-    print("Enter quit to end the application")
+    print("Please use the following notation: + for addition, - for subtraction, * for multiplication, and / for division. \n \n")
+    print("Enter quit to end the application, clear to clear the number stack, and stack to see the currently saved numbers.")
 
     while True:
         try:
             
-            expression = input();
-            expressionAsList = expression.split();
+            expression = input()
+            expressionAsList = expression.split()
             
             operations = {"+": lambda a,b: a+b, "-": lambda a,b: a-b, "*": lambda a,b: a*b, "/": lambda a,b: a/b}
             
@@ -17,7 +17,10 @@ def Calc():
                 
                 #User quit
                 if token == 'quit':
-                    quit();
+                    quit()
+                
+                elif token == 'clear':
+                    stack = []
                 
                 elif token == 'stack':
                     print(stack)
@@ -36,11 +39,11 @@ def Calc():
                     n1 = float(stack.pop(-2))
                     n2 = float(stack.pop(-1))
                     sol = operations[token](n1, n2)
-                    print(sol)
                     stack.append(sol)
+                    print(str(n1) +" "+ token + " " + str(n2) + " = " + str(sol))
 
         except IndexError:
-            print("No numbers have been entered, or stack is does not contain two or more elements! Type 'stack' to see the current values saved!")
+            print("No numbers have been entered, or stack does not contain two or more elements! Type 'stack' to see the current values saved!")
         
         except ZeroDivisionError:
             print("Cannot divide by zero")
